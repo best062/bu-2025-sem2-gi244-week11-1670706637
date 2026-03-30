@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction smashAction;
     private InputAction breakAction;
+    
+    public GameObject powerIndicator;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,6 +55,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("PowerUp"))
         {
             hasPowerUp = true;
+            if (powerIndicator != null)
+            {
+                powerIndicator.SetActive(true);
+            }
             Destroy(other.gameObject);
             if (CountdownCoroutine != null)
             {
@@ -68,5 +74,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         hasPowerUp = false;
+        powerIndicator.SetActive(false);
     }
 }
